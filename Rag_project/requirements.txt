@@ -1,0 +1,73 @@
+# =========================
+# Core LangChain Packages
+# =========================
+langchain
+langchain-core
+langchain-community
+
+# =========================
+# Model Provider Integrations
+# =========================
+langchain-openai
+langchain-mistralai
+
+# =========================
+# Embedding Models
+# =========================
+langchain-huggingface
+sentence-transformers
+
+# =========================
+# Vector Databases / Stores
+# =========================
+chromadb
+faiss-cpu
+
+# =========================
+# Document Loaders
+# =========================
+pypdf
+python-docx
+unstructured
+beautifulsoup4
+lxml
+
+# =========================
+# Text Splitting / Tokenization
+# =========================
+tiktoken
+
+# =========================
+# Retrieval Enhancements
+# =========================
+rank-bm25
+
+# =========================
+# Web API and UI
+# =========================
+streamlit
+fastapi
+uvicorn
+
+# =========================
+# Environment Variables
+# =========================
+python-dotenv
+
+# =========================
+# Data Validation
+# =========================
+pydantic
+
+# =========================
+# Local Hugging Face Models (Optional)
+# =========================
+transformers
+torch
+accelerate
+
+# =========================
+# Utilities
+# =========================
+numpy
+pandas

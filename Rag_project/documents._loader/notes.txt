@@ -1,0 +1,266 @@
+```txt
+========================================
+DeepLearning.AI - Quick Notes
+========================================
+
+What is DeepLearning.AI?
+------------------------
+DeepLearning.AI is an education company founded by :contentReference[oaicite:0]{index=0}.
+It provides high-quality courses on:
+- Artificial Intelligence (AI)
+- Machine Learning (ML)
+- Deep Learning
+- Generative AI
+- Large Language Models (LLMs)
+- Prompt Engineering
+- Retrieval-Augmented Generation (RAG)
+- AI Agents
+
+Official Website:
+:contentReference[oaicite:1]{index=1}
+
+========================================
+Popular Courses
+========================================
+
+1. Machine Learning Specialization
+2. Deep Learning Specialization
+3. Generative AI for Everyone
+4. ChatGPT Prompt Engineering for Developers
+5. LangChain for LLM Application Development
+6. Building Systems with the ChatGPT API
+7. AI Agents in LangGraph
+8. Retrieval-Augmented Generation (RAG)
+
+========================================
+Machine Learning
+========================================
+
+Machine Learning is a subset of AI where computers learn patterns from data.
+
+Types of Machine Learning:
+- Supervised Learning
+- Unsupervised Learning
+- Reinforcement Learning
+
+Examples:
+- House Price Prediction
+- Spam Detection
+- Recommendation Systems
+
+========================================
+Deep Learning
+========================================
+
+Deep Learning uses neural networks with many layers to solve complex problems.
+
+Applications:
+- Image Classification
+- Speech Recognition
+- Natural Language Processing
+- Self-Driving Cars
+
+Popular Frameworks:
+- :contentReference[oaicite:2]{index=2}
+- :contentReference[oaicite:3]{index=3}
+
+========================================
+Generative AI
+========================================
+
+Generative AI creates new content such as:
+- Text
+- Images
+- Audio
+- Video
+- Code
+
+Examples:
+- :contentReference[oaicite:4]{index=4} ChatGPT
+- :contentReference[oaicite:6]{index=6} Gemini
+- :contentReference[oaicite:8]{index=8}
+- :contentReference[oaicite:9]{index=9} Claude
+
+========================================
+Large Language Models (LLMs)
+========================================
+
+LLMs are trained on huge amounts of text data and can:
+- Answer questions
+- Summarize text
+- Translate languages
+- Generate code
+- Write content
+
+Examples:
+- GPT models
+- Gemini models
+- Mistral models
+- Llama models
+
+========================================
+Prompt Engineering
+========================================
+
+Prompt Engineering is the process of writing effective instructions for LLMs.
+
+Best Practices:
+- Be specific
+- Provide examples
+- Define output format
+- Use step-by-step instructions
+
+Example:
+"Summarize this article in 3 bullet points."
+
+========================================
+Embeddings
+========================================
+
+Embeddings convert text into numerical vectors that capture meaning.
+
+Uses:
+- Semantic Search
+- Similarity Matching
+- Recommendation Systems
+- RAG Applications
+
+Popular Models:
+- :contentReference[oaicite:11]{index=11} sentence-transformers
+- OpenAI embeddings
+- Mistral embeddings
+
+========================================
+Vector Databases
+========================================
+
+Vector databases store embeddings for efficient retrieval.
+
+Popular Options:
+- :contentReference[oaicite:12]{index=12}
+- :contentReference[oaicite:13]{index=13}
+- :contentReference[oaicite:14]{index=14}
+- :contentReference[oaicite:15]{index=15}
+
+========================================
+RAG (Retrieval-Augmented Generation)
+========================================
+
+RAG combines:
+1. Document Loading
+2. Text Splitting
+3. Embeddings
+4. Vector Storage
+5. Retrieval
+6. LLM Generation
+
+Benefits:
+- Uses your own documents
+- Reduces hallucinations
+- Produces more accurate answers
+
+Applications:
+- PDF Q&A
+- Chat with Documents
+- Knowledge Bases
+- Customer Support Bots
+
+========================================
+LangChain
+========================================
+
+:contentReference[oaicite:16]{index=16} is a framework for building AI applications.
+
+Key Components:
+- Prompt Templates
+- Output Parsers
+- Chains
+- Agents
+- Memory
+- Retrievers
+
+========================================
+LangGraph
+========================================
+
+:contentReference[oaicite:17]{index=17} is used to build stateful AI agents with workflows.
+
+Features:
+- Multi-step reasoning
+- Tool calling
+- Memory
+- Human-in-the-loop
+
+========================================
+Useful Python Packages
+========================================
+
+- langchain
+- langchain-openai
+- langchain-mistralai
+- langchain-huggingface
+- chromadb
+- faiss-cpu
+- sentence-transformers
+- streamlit
+- python-dotenv
+
+========================================
+Typical RAG Workflow
+========================================
+
+1. Load documents
+2. Split text into chunks
+3. Generate embeddings
+4. Store vectors in Chroma/FAISS
+5. Retrieve relevant chunks
+6. Send context to LLM
+7. Generate final answer
+
+========================================
+Career Path Recommendation
+========================================
+
+1. Python Basics
+2. Machine Learning
+3. Deep Learning
+4. NLP
+5. Generative AI
+6. Prompt Engineering
+7. LangChain
+8. RAG
+9. AI Agents
+10. Deployment
+
+========================================
+Recommended DeepLearning.AI Courses
+========================================
+
+Beginner:
+- AI for Everyone
+- Machine Learning Specialization
+
+Intermediate:
+- Deep Learning Specialization
+- Generative AI for Everyone
+
+Advanced:
+- LangChain for LLM Application Development
+- Building AI Agents
+- RAG Systems
+
+========================================
+Summary
+========================================
+
+DeepLearning.AI is one of the best platforms to learn:
+- Machine Learning
+- Deep Learning
+- Generative AI
+- Prompt Engineering
+- RAG
+- AI Agents
+
+If your goal is to build modern AI applications, the best learning path is:
+Python → Machine Learning → Deep Learning → LLMs → LangChain → RAG → AI Agents.
+```

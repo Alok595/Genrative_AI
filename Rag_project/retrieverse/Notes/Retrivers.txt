@@ -1,0 +1,594 @@
+# Retrievers in AI Applications — Complete Developer Notes
+
+## 1. What Is a Retriever?
+
+A **Retriever** is a component that finds relevant information from a data source based on a user's query.
+
+In Retrieval-Augmented Generation (RAG), the retriever searches through documents, databases, APIs, or vector stores and returns the most relevant pieces of information ("chunks") to the language model.
+
+### Simple Definition
+
+> **Retriever = Search Engine for Your Knowledge Base**
+
+The language model itself does not search your documents directly. Instead:
+
+1. User asks a question.
+2. Retriever finds relevant documents.
+3. Retrieved documents are sent to the LLM.
+4. LLM generates the answer.
+
+---
+
+## 2. Why Retrievers Are Needed
+
+Large Language Models have limitations:
+
+* Limited context window
+* May hallucinate
+* Cannot know private or updated data
+* Expensive to send all documents every time
+
+### Without Retriever
+
+If you have 10,000 documents, sending everything to the LLM is impossible.
+
+### With Retriever
+
+Only the top relevant chunks are selected.
+
+### Benefits
+
+* Faster responses
+* Lower cost
+* More accurate answers
+* Access to private knowledge
+* Scalable systems
+
+---
+
+## 3. Real-World Analogy
+
+Imagine a huge library.
+
+* **Documents** = Books
+* **Retriever** = Librarian
+* **LLM** = Expert writer
+* **User Query** = Question
+
+Instead of reading all books, the librarian finds the most relevant ones.
+
+---
+
+## 4. Retriever in RAG Architecture
+
+```text
+User Query
+    ↓
+Embedding Model
+    ↓
+Retriever
+    ↓
+Top-K Relevant Chunks
+    ↓
+Prompt Construction
+    ↓
+LLM
+    ↓
+Final Answer
+```
+
+---
+
+## 5. What Does a Retriever Return?
+
+Retrievers typically return:
+
+* Document text
+* Metadata
+* Similarity score
+* Source information
+
+Example:
+
+```json
+[
+  {
+    "content": "Python is a programming language.",
+    "score": 0.92,
+    "metadata": {
+      "source": "python_guide.pdf",
+      "page": 3
+    }
+  }
+]
+```
+
+---
+
+# 6. Types of Retrievers
+
+There are several retrieval strategies, each optimized for different use cases.
+
+---
+
+## 6.1 Keyword Retriever (Sparse Retrieval)
+
+Searches using exact words.
+
+### Technologies
+
+* BM25
+* Apache Lucene
+* Elasticsearch
+* Apache Solr
+
+### How It Works
+
+* Tokenize query and documents
+* Count matching terms
+* Rank by importance
+
+### Advantages
+
+* Fast
+* Interpretable
+* No embeddings required
+
+### Disadvantages
+
+* Cannot understand meaning
+* Sensitive to synonyms
+
+### Example
+
+Query: `car insurance`
+
+Document containing `vehicle coverage` may not match.
+
+---
+
+## 6.2 Vector Retriever (Dense Retrieval)
+
+Uses embeddings to compare semantic meaning.
+
+### Technologies
+
+* OpenAI embeddings
+* Cohere embeddings
+* Google embedding models
+* Pinecone
+* Weaviate
+* Qdrant
+* Chroma
+
+### How It Works
+
+1. Convert query into vector.
+2. Compare with document vectors.
+3. Find nearest vectors.
+
+### Similarity Metrics
+
+* Cosine similarity
+* Dot product
+* Euclidean distance
+
+### Advantages
+
+* Understands meaning
+* Handles synonyms
+* Better for natural language queries
+
+### Disadvantages
+
+* Requires embedding generation
+* More computationally expensive
+
+---
+
+## 6.3 Hybrid Retriever
+
+Combines keyword and vector retrieval.
+
+### Formula
+
+```text
+Final Score = α × Dense Score + β × Sparse Score
+```
+
+### Advantages
+
+* Best of both worlds
+* Often highest accuracy
+
+### Disadvantages
+
+* More complex to implement
+* Requires tuning
+
+---
+
+## 6.4 Metadata Retriever
+
+Filters documents using metadata.
+
+### Examples
+
+* Date ranges
+* Author
+* Category
+* Access permissions
+* Department
+
+### Use Cases
+
+* "Show finance reports from 2025"
+* "Retrieve HR documents only"
+
+---
+
+## 6.5 Multi-Query Retriever
+
+Generates several alternative queries and retrieves results for all.
+
+### Example
+
+User query:
+`How to reduce cloud costs?`
+
+Generated queries:
+
+* Lower AWS expenses
+* Optimize cloud infrastructure
+* Reduce server spending
+
+### Advantages
+
+Improves recall when users phrase questions poorly.
+
+---
+
+## 6.6 Self-Query Retriever
+
+Uses the LLM to convert natural language into:
+
+1. Search query
+2. Metadata filters
+
+### Example
+
+Question:
+"Show machine learning papers after 2023 with high citations."
+
+Structured output:
+
+```json
+{
+  "query": "machine learning",
+  "filters": {
+    "year": { "$gt": 2023 },
+    "citations": { "$gt": 100 }
+  }
+}
+```
+
+---
+
+## 6.7 Parent Document Retriever
+
+Indexes small chunks but returns larger parent documents.
+
+### Why?
+
+Small chunks improve search accuracy, but larger chunks provide better context.
+
+### Example
+
+* Indexed chunk: 200 tokens
+* Returned parent section: 2,000 tokens
+
+---
+
+## 6.8 Contextual Compression Retriever
+
+Retrieves documents and then compresses them to keep only relevant parts.
+
+### Benefits
+
+* Reduces prompt size
+* Lowers cost
+* Improves answer quality
+
+---
+
+## 6.9 Ensemble Retriever
+
+Runs multiple retrievers in parallel and merges results.
+
+### Components
+
+* BM25 Retriever
+* Vector Retriever
+* Metadata Retriever
+
+---
+
+## 6.10 Time-Weighted Retriever
+
+Prioritizes newer documents.
+
+### Use Cases
+
+* Chat history
+* News
+* Logs
+* Incident reports
+
+---
+
+## 6.11 Score Threshold Retriever
+
+Returns all documents above a minimum score instead of a fixed top-k.
+
+### Example
+
+Return all results with score > 0.8.
+
+---
+
+## 6.12 Merger Retriever
+
+Combines outputs from multiple retrievers into one ranked list.
+
+---
+
+## 6.13 Router Retriever
+
+Chooses which retriever to use depending on query type.
+
+### Example
+
+* Product questions → Metadata Retriever
+* General Q&A → Hybrid Retriever
+* Recent information → Time-Weighted Retriever
+
+---
+
+# 7. Why So Many Retriever Types Exist
+
+No single retrieval strategy works for all problems.
+
+Different data and queries require different approaches.
+
+| Problem                | Best Retriever         |
+| ---------------------- | ---------------------- |
+| Exact keyword matching | BM25                   |
+| Semantic understanding | Vector                 |
+| Highest accuracy       | Hybrid                 |
+| Structured filters     | Self-Query             |
+| Better context         | Parent Document        |
+| Reduced token cost     | Contextual Compression |
+| Fresh data             | Time-Weighted          |
+| Domain routing         | Router                 |
+
+---
+
+# 8. Retriever vs Vector Store
+
+| Component       | Responsibility           |
+| --------------- | ------------------------ |
+| Retriever       | Search logic             |
+| Vector Store    | Storage of embeddings    |
+| Embedding Model | Converts text to vectors |
+| LLM             | Generates final answer   |
+
+### Analogy
+
+* Vector Store = Database
+* Retriever = Query Engine
+* LLM = Writer
+
+---
+
+# 9. Retriever Workflow in LangChain
+
+[LangChain Documentation](https://python.langchain.com?utm_source=chatgpt.com)
+
+```python
+vectorstore = Chroma.from_documents(docs, embeddings)
+retriever = vectorstore.as_retriever(search_kwargs={"k": 5})
+docs = retriever.invoke("What is RAG?")
+```
+
+---
+
+# 10. Advanced Retrieval Pipeline
+
+```text
+User Query
+   ↓
+Query Rewriting
+   ↓
+Router Retriever
+   ↓
+Hybrid Retrieval
+   ↓
+Metadata Filtering
+   ↓
+Reranking
+   ↓
+Contextual Compression
+   ↓
+LLM
+```
+
+---
+
+# 11. Retriever Evaluation Metrics
+
+## Precision
+
+Relevant retrieved documents / total retrieved documents.
+
+## Recall
+
+Relevant retrieved documents / all relevant documents.
+
+## MRR (Mean Reciprocal Rank)
+
+Measures how early the first correct document appears.
+
+## nDCG
+
+Evaluates ranking quality.
+
+---
+
+# 12. Common Developer Design Choices
+
+### Chunk Size
+
+Typically 200–1,000 tokens.
+
+### Top-K
+
+Usually 3–10 documents.
+
+### Similarity Metric
+
+Cosine similarity is common.
+
+### Reranker
+
+Cross-encoder models improve ranking.
+
+---
+
+# 13. Production Use Cases
+
+* Customer support bots
+* Enterprise search
+* Legal research
+* Medical knowledge systems
+* Code assistants
+* Recommendation systems
+
+---
+
+# 14. Popular Retrieval Libraries and Tools
+
+* LangChain
+* LlamaIndex
+* Pinecone
+* Weaviate
+* Qdrant
+* Milvus
+* Elastic
+
+---
+
+# 15. Which Retriever Should You Use?
+
+### Start Simple
+
+* Vector Retriever
+
+### For Better Accuracy
+
+* Hybrid Retriever
+
+### With Metadata
+
+* Self-Query Retriever
+
+### For Large Documents
+
+* Parent Document Retriever
+
+### To Save Tokens
+
+* Contextual Compression Retriever
+
+### Complex Systems
+
+* Router + Ensemble + Reranking
+
+---
+
+# 16. Recommended Learning Path
+
+1. Understand embeddings.
+2. Learn vector databases.
+3. Build a basic vector retriever.
+4. Add BM25.
+5. Implement hybrid search.
+6. Add metadata filters.
+7. Use reranking.
+8. Optimize with compression.
+
+---
+
+# 17. Interview Questions
+
+1. What is a retriever in RAG?
+2. Difference between BM25 and vector retrieval?
+3. Why use hybrid retrieval?
+4. What is Self-Query Retriever?
+5. What is Parent Document Retriever?
+6. How do you evaluate retrieval quality?
+7. What is contextual compression?
+8. Retriever vs vector store?
+
+---
+
+# 18. Best Practices
+
+* Use high-quality chunking.
+* Store useful metadata.
+* Start with top-k = 5.
+* Add reranking.
+* Monitor precision and recall.
+* Evaluate with real user queries.
+* Cache embeddings.
+
+---
+
+# 19. Typical Production Architecture
+
+```text
+Documents
+   ↓
+Chunking
+   ↓
+Embeddings
+   ↓
+Vector Store
+   ↓
+Retriever
+   ↓
+Reranker
+   ↓
+Prompt Builder
+   ↓
+LLM
+   ↓
+Answer
+```
+
+---
+
+# 20. Final Summary
+
+A retriever is one of the most important components in any RAG system. It determines what information the LLM sees, and therefore has a major impact on accuracy, cost, and performance.
+
+Different retriever types exist because different problems require different retrieval strategies:
+
+* BM25 for keyword search
+* Vector for semantic search
+* Hybrid for best overall performance
+* Self-Query for metadata-aware retrieval
+* Parent Document for richer context
+* Compression for token efficiency
+* Router and Ensemble for advanced systems
+
+Mastering retrievers is essential for building high-quality AI applications.

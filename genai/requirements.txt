@@ -1,0 +1,11 @@
+langchain
+langchain-openai
+langchain-groq
+langchain-google-genai
+langchain-mistralai
+langchain-community
+python-dotenv
+pydantic
+tiktoken
+chromadb
+langchain_huggingface
